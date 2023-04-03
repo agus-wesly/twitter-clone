@@ -60,8 +60,6 @@ const topics = ref([
 
 const darkMode = inject("darkMode")
 
-console.log("From right", darkMode.value)
-
 const accounts = ref([
   {
     username: "Isaac",
