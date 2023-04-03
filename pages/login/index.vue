@@ -1,4 +1,5 @@
 <template>
+  <Title>Twitter | Login</Title>
   <div>
     <AuthView @on-success="handleAuthSuccess" />
   </div>

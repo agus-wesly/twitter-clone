@@ -70,6 +70,14 @@ const authLoading = useAuthLoading()
 const { useModalContent, closeModal } = useTweet()
 const modalContent = useModalContent()
 
+watchEffect(() => {
+  if (!user.value && !authLoading.value) {
+    navigateTo({
+      path: `/login`,
+    })
+  }
+})
+
 function handleTweetSuccess(tweet) {
   closeModal()
   navigateTo({

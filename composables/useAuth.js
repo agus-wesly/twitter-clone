@@ -73,8 +73,8 @@ export default () => {
 
   const initAuth = () => {
     return new Promise(async (res, rej) => {
-      if (useAuthUser().value) {
-        res(true)
+      if (useAuthUser().value?.id) {
+        return res(true)
       }
       try {
         setLoading(true)
