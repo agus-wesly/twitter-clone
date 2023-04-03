@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  overflow: auto !important;
+}
+
+body {
+  @apply h-screen overflow-x-hidden;
+}
+
+@layer utilities {
+  .wrap-text {
+    overflow-wrap: break-word;
+  }
+}
