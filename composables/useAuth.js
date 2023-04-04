@@ -90,11 +90,24 @@ export default () => {
     })
   }
 
+  const logoutUser = async () => {
+    try {
+      const response = await $fetch("/api/auth/logout", {
+        method: "GET",
+      })
+      setToken(null)
+      setUser(null)
+    } catch (error) {
+      throw new Error(error.statusMessage)
+    }
+  }
+
   return {
     loginUser,
     initAuth,
     useAuthToken,
     useAuthUser,
     useAuthLoading,
+    logoutUser,
   }
 }

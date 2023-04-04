@@ -12,7 +12,7 @@
     </div>
 
     <div
-      class="flex-1 flex justify-center lg:flex-none lg:w-96 h-full items-center px-16"
+      class="flex-1 flex justify-center lg:flex-none lg:w-96 h-full items-center px-8"
     >
       <div class="flex flex-col items-center space-y-6 w-full max-w-md">
         <h1 class="font-bold text-lg text-neutral-800 dark:text-neutral-200">

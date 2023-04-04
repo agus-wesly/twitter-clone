@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="user"
     class="sticky flex flex-col items-center md:items-start gap-6 top-0 p-4 lg:p-6 min-h-screen"
   >
     <div
@@ -59,6 +60,7 @@
       </button>
     </button>
   </div>
+  <div v-else>Loading...</div>
 </template>
 
 <script setup>
@@ -70,7 +72,7 @@ import {
 } from "@heroicons/vue/24/outline"
 
 const { openModal } = useTweet()
-const { useAuthUser } = useAuth()
+const { useAuthUser, logoutUser } = useAuth()
 const user = useAuthUser()
 const activeOption = ref(false)
 
@@ -82,7 +84,10 @@ function handleToggleOption() {
   activeOption.value = !activeOption.value
 }
 
-function handleLogout() {
-  alert("Logout")
+async function handleLogout() {
+  await logoutUser()
+  navigateTo({
+    path: "/login",
+  })
 }
 </script>
