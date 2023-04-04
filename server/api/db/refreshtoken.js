@@ -16,3 +16,11 @@ export const findTokenByToken = async (token) => {
     },
   })
 }
+
+export const deleteToken = async (token) => {
+  return await prisma.refreshToken.delete({
+    where: {
+      token,
+    },
+  })
+}

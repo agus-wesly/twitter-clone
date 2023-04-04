@@ -9,6 +9,7 @@ export default defineEventHandler((event) => {
     const accessToken = (
       reqHeaders["Authorization"] || reqHeaders["authorization"]
     )?.split(" ")[1]
+
     if (!accessToken) {
       return sendError(
         event,
