@@ -18,9 +18,16 @@ export const findTokenByToken = async (token) => {
 }
 
 export const deleteToken = async (token) => {
-  return await prisma.refreshToken.delete({
-    where: {
-      token,
-    },
-  })
+  try {
+    console.log(token)
+
+    await prisma.refreshToken.delete({
+      where: {
+        token,
+      },
+    })
+  } catch (error) {
+    console.log(error)
+    throw new Error(error)
+  }
 }
