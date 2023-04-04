@@ -36,7 +36,11 @@ export default eventHandler(async (event) => {
 
   await createRefreshToken(refreshToken, user.id)
 
-  setCookie(event, "refresh_token", refreshToken)
+  setCookie(event, "refresh_token", refreshToken, {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+  })
 
   return {
     accessToken,

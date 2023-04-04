@@ -12,7 +12,8 @@ export default eventHandler(async (event) => {
     await deleteToken(refreshToken)
     deleteCookie(event, "refresh_token", {
       httpOnly: true,
-      sameSite: true,
+      sameSite: "none",
+      secure: true,
     })
 
     setResponseStatus(event, 204)
