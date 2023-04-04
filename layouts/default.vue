@@ -5,9 +5,10 @@
     </Head>
     <Body class="bg-neutral-50 dark:bg-neutral-800">
       <!-- APP -->
-      <div v-if="authLoading" class="min-h-screen flex items-center">
+      <div v-if="authLoading | !user" class="min-h-screen flex items-center">
         <LogoLoading />
       </div>
+
       <div
         v-else
         class="grid grid-cols-12 m-auto max-w-7xl dark:bg-neutral-800"
@@ -50,8 +51,6 @@
           </div>
         </UIModal>
       </div>
-
-      <!-- <Bottom /> -->
     </Body>
   </Html>
 </template>

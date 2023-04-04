@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="loading" class="min-h-screen flex items-center">
+    <div v-if="loading || user" class="min-h-screen flex items-center">
       <LogoLoading />
     </div>
 

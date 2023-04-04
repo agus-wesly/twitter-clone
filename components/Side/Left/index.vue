@@ -1,7 +1,6 @@
 <template>
   <div
-    v-if="user"
-    class="sticky flex flex-col items-center md:items-start gap-6 top-0 p-4 lg:p-6 min-h-screen"
+    class="sticky flex flex-col items-center md:items-start gap-6 top-0 p-4 lg:p-6 h-[95vh]"
   >
     <div
       class="w-min rounded-full hover:bg-sky-100 dark:hover:bg-neutral-900 p-2 mb-2 -mt-1"
@@ -36,7 +35,7 @@
     >
       <img
         :src="user.profileImage"
-        class="w-10 h-10 flex-none rounded-full object-cover"
+        class="w-8 h-8 flex-none rounded-full object-cover"
       />
       <div class="hidden md:block">
         <h3 class="text-sm text-neutral-900 font-bold">{{ user.name }}</h3>
@@ -51,7 +50,7 @@
 
       <button
         v-show="activeOption"
-        @click="handleLogout"
+        @click.stop="handleLogout"
         class="absolute w-[200px] h-10 p-2 bg-neutral-50 hover:bg-red-100 -top-16 left-0 text-left border border-red-200 rounded-full"
       >
         <p class="text-red-700 px-3 text-sm font-semibold">
@@ -60,7 +59,6 @@
       </button>
     </button>
   </div>
-  <div v-else>Loading...</div>
 </template>
 
 <script setup>
