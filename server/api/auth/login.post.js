@@ -38,8 +38,6 @@ export default eventHandler(async (event) => {
 
   setCookie(event, "refresh_token", refreshToken, {
     httpOnly: true,
-    sameSite: "none",
-    secure: true,
   })
 
   return {

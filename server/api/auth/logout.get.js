@@ -2,23 +2,24 @@ import { deleteToken } from "../db/refreshtoken"
 import { sendError } from "h3"
 
 export default eventHandler(async (event) => {
-  const refreshToken = getCookie(event, "refresh_token")
-  if (!refreshToken) {
+  const { refresh_token } = parseCookies(event)
+  if (!refresh_token) {
     setResponseStatus(event, 204)
     return {}
   }
 
   try {
-    await deleteToken(refreshToken)
-    deleteCookie(event, "refresh_token", {
+    await deleteToken(refresh_token)
+
+    setCookie(event, "refresh_token", "", {
       httpOnly: true,
-      sameSite: "none",
-      secure: true,
     })
 
     setResponseStatus(event, 204)
 
-    return {}
+    return {
+      message: "done",
+    }
   } catch (error) {
     console.log(error)
 
