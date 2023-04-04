@@ -1,5 +1,7 @@
 <template>
-  <div class="space-y-5 flex flex-col sticky top-0 p-4 lg:p-6">
+  <div
+    class="sticky flex flex-col items-center md:items-start gap-6 top-0 p-4 lg:p-6 min-h-screen"
+  >
     <div
       class="w-min rounded-full hover:bg-sky-100 dark:hover:bg-neutral-900 p-2 mb-2 -mt-1"
     >
@@ -14,38 +16,8 @@
     </SideLeftItem>
 
     <SideLeftItem>
-      <HashtagIcon class="w-5 h-5 flex-none" />
-      <p class="text-sm hidden md:block">Explore</p>
-    </SideLeftItem>
-
-    <SideLeftItem>
       <BellIcon class="w-5 h-5 flex-none" />
       <p class="text-sm hidden md:block">Notifications</p>
-    </SideLeftItem>
-
-    <SideLeftItem>
-      <InboxIcon class="w-5 h-5 flex-none" />
-      <p class="text-sm hidden md:block">Inbox</p>
-    </SideLeftItem>
-
-    <SideLeftItem>
-      <BookmarkIcon class="w-5 h-5 flex-none" />
-      <p class="text-sm hidden md:block">Bookmarks</p>
-    </SideLeftItem>
-
-    <SideLeftItem>
-      <DocumentArrowUpIcon class="w-5 h-5 flex-none" />
-      <p class="text-sm hidden md:block">Lists</p>
-    </SideLeftItem>
-
-    <SideLeftItem>
-      <UserIcon class="w-5 h-5 flex-none" />
-      <p class="text-sm hidden md:block">Profile</p>
-    </SideLeftItem>
-
-    <SideLeftItem>
-      <EllipsisHorizontalIcon class="w-5 h-5 flex-none" />
-      <p class="text-sm hidden md:block">More</p>
     </SideLeftItem>
 
     <UIButton @click="handleTweetButton" liquid class="hidden md:block">
@@ -55,24 +27,62 @@
     <UIButton @click="handleTweetButton" size="sm" class="block md:hidden">
       <PlusIcon class="w-5 h-5" />
     </UIButton>
+
+    <br />
+    <button
+      @click="handleToggleOption"
+      class="mt-auto flex gap-3 w-full items-center relative"
+    >
+      <img
+        :src="user.profileImage"
+        class="w-10 h-10 flex-none rounded-full object-cover"
+      />
+      <div class="hidden md:block">
+        <h3 class="text-sm text-neutral-900 font-bold">{{ user.name }}</h3>
+        <p class="text-neutral-700 text-xs">@{{ user.username }}</p>
+      </div>
+
+      <div
+        class="p-2 w-min ml-auto rounded-full text-neutral-800 dark:text-neutral-300 hover:bg-sky-50 dark:hover:bg-neutral-900 hidden md:block"
+      >
+        <EllipsisVerticalIcon class="w-5 h-5" />
+      </div>
+
+      <button
+        v-show="activeOption"
+        @click="handleLogout"
+        class="absolute w-[200px] h-10 p-2 bg-neutral-50 hover:bg-red-100 -top-16 left-0 text-left border border-red-200 rounded-full"
+      >
+        <p class="text-red-700 px-3 text-sm font-semibold">
+          Logout @{{ user.username }}
+        </p>
+      </button>
+    </button>
   </div>
 </template>
 
 <script setup>
 import { HomeIcon } from "@heroicons/vue/24/solid"
 import {
-  HashtagIcon,
   BellIcon,
-  InboxIcon,
-  BookmarkIcon,
-  DocumentArrowUpIcon,
-  UserIcon,
-  EllipsisHorizontalIcon,
   PlusIcon,
+  EllipsisVerticalIcon,
 } from "@heroicons/vue/24/outline"
 
 const { openModal } = useTweet()
+const { useAuthUser } = useAuth()
+const user = useAuthUser()
+const activeOption = ref(false)
+
 function handleTweetButton() {
   openModal()
+}
+
+function handleToggleOption() {
+  activeOption.value = !activeOption.value
+}
+
+function handleLogout() {
+  alert("Logout")
 }
 </script>

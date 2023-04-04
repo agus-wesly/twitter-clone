@@ -10,24 +10,22 @@
       </div>
       <div
         v-else
-        class="grid grid-cols-12 m-auto max-w-7xl lg:gap-6 dark:bg-neutral-800"
+        class="grid grid-cols-12 m-auto max-w-7xl dark:bg-neutral-800"
       >
         <!-- LEFT-SIDEBAR -->
-        <div class="hidden sm:col-span-1 md:col-span-2 sm:block">
-          <SideLeft>
-            <p>Tes</p>
-          </SideLeft>
+        <div class="col-span-2 md:col-span-3 lg:col-span-2 sm:block">
+          <SideLeft />
         </div>
 
         <!-- MAIN -->
         <main
-          class="col-span-12 sm:col-span-7 xl:col-span-6 lg:-mt-8 lg:pt-4 pb-14 sm:pb-0"
+          class="col-span-10 md:col-span-9 lg:col-span-6 lg:-mt-8 lg:pt-4 pb-14 sm:pb-0"
         >
           <slot />
         </main>
 
         <!-- RIGHT SIDEBAR -->
-        <div class="hidden sm:block sm:col-span-4 md:col-span-3 xl:col-span-4">
+        <div class="hidden lg:block lg:col-span-4">
           <SideRight />
         </div>
 
@@ -53,7 +51,7 @@
         </UIModal>
       </div>
 
-      <Bottom />
+      <!-- <Bottom /> -->
     </Body>
   </Html>
 </template>
