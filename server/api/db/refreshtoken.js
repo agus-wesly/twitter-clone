@@ -19,9 +19,9 @@ export const findTokenByToken = async (token) => {
 
 export const deleteToken = async (token) => {
   try {
-    const refreshToken = await prisma.refreshToken.findUnique({
+    const refreshToken = await prisma.refreshToken.findFirst({
       where: {
-        token,
+        token: token,
       },
     })
 
