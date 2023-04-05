@@ -5,6 +5,7 @@
     <div class="ml-3 text-neutral-500 dark:text-neutral-400">
       <span class="font-bold text-neutral-800 dark:text-gray-300 text-base"
         >{{ author.name.slice(0, 8) }}
+        {{ author }}
         <VerifiedIcon
           class="w-4 h-4 mb-1 text-amber-500 inline"
           v-if="author.verified"
