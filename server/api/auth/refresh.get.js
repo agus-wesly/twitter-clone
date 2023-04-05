@@ -10,7 +10,7 @@ export default eventHandler(async (event) => {
   if (!refresh_token) {
     return sendError(
       event,
-      createError({ statusCode: 401, statusMessage: "Token not found!" })
+      createError({ statusCode: 401, message: "Token not found!" })
     )
   }
 
@@ -19,7 +19,7 @@ export default eventHandler(async (event) => {
   if (!tokenData) {
     return sendError(
       event,
-      createError({ statusCode: 401, statusMessage: "Token invalid" })
+      createError({ statusCode: 401, message: "Token invalid" })
     )
   }
 
@@ -28,7 +28,7 @@ export default eventHandler(async (event) => {
   if (!decodedToken) {
     return sendError(
       event,
-      createError({ statusCode: 401, statusMessage: "Token invalidd" })
+      createError({ statusCode: 401, message: "Token invalidd" })
     )
   }
 

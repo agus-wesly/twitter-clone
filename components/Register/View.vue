@@ -14,7 +14,7 @@
     <div
       class="flex-1 flex justify-center lg:flex-none lg:w-96 h-full items-center px-8"
     >
-      <div class="flex flex-col items-center space-y-6 w-full max-w-md">
+      <div class="flex flex-col items-center space-y-4 w-full max-w-md">
         <h1 class="font-bold text-lg text-neutral-800 dark:text-neutral-200">
           Create Account
         </h1>
@@ -60,6 +60,12 @@
           placeholder="@username"
         />
         <UIInput
+          v-model:input-value="InputValue.email"
+          input-value=""
+          label="Email"
+          placeholder="Your email"
+        />
+        <UIInput
           v-model:input-value="InputValue.password"
           label="Password"
           placeholder="********"
@@ -99,6 +105,7 @@ const { register } = useRegister()
 const InputValue = reactive({
   username: "",
   name: "",
+  email: "",
   password: "",
   confirmPassword: "",
 })

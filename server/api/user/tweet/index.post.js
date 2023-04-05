@@ -27,7 +27,7 @@ export default eventHandler(async (event) => {
       return sendError(
         createError({
           statusCode: 401,
-          statusMessage: "Unauthorzed user",
+          message: "Unauthorzed user",
         })
       )
     }
@@ -67,7 +67,7 @@ export default eventHandler(async (event) => {
       event,
       createError({
         statusCode: 500,
-        statusMessage: "Server Error",
+        message: "Server Error",
       })
     )
   }

@@ -33,7 +33,7 @@ export default eventHandler(async (event) => {
     ) {
       return sendError(
         event,
-        createError({ statusCode: 400, statusMessage: "Invalid field" })
+        createError({ statusCode: 400, message: "Invalid field" })
       )
     }
 
@@ -42,7 +42,7 @@ export default eventHandler(async (event) => {
         event,
         createError({
           statusCode: 400,
-          statusMessage: "Unmatch password and confirm password !",
+          message: "Unmatch password and confirm password !",
         })
       )
     }
@@ -64,6 +64,7 @@ export default eventHandler(async (event) => {
       email,
       password: hashedPassword,
       profileImage: profileURL,
+      verified: false,
     }
 
     const response = await addUser(newUser)
@@ -72,11 +73,13 @@ export default eventHandler(async (event) => {
       data: userTransform(response),
     }
   } catch (error) {
+    console.log(error)
+
     return sendError(
       event,
       createError({
         statusCode: 500,
-        statusMessage: error.message,
+        message: error.message,
       })
     )
   }

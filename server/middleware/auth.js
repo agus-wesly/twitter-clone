@@ -15,7 +15,7 @@ export default defineEventHandler((event) => {
         event,
         createError({
           statusCode: 401,
-          statusMessage: "Token not found",
+          message: "Token not found",
         })
       )
     }
@@ -26,7 +26,7 @@ export default defineEventHandler((event) => {
         event,
         createError({
           statusCode: 401,
-          statusMessage: "Invalid token",
+          message: "Invalid token",
         })
       )
     }

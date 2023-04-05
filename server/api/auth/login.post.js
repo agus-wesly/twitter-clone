@@ -16,7 +16,7 @@ export default eventHandler(async (event) => {
       event,
       createError({
         statusCode: 401,
-        statusMessage: "User not found",
+        message: "User not found",
       })
     )
   }
@@ -27,7 +27,7 @@ export default eventHandler(async (event) => {
       event,
       createError({
         statusCode: 401,
-        statusMessage: "Wrong username or password",
+        message: "Wrong username or password",
       })
     )
   }

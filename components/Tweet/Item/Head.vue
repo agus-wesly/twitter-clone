@@ -3,9 +3,13 @@
     <img :src="author.profileImage" class="w-9 h-9 object-cover rounded-full" />
 
     <div class="ml-3 text-neutral-500 dark:text-neutral-400">
-      <span class="font-bold text-neutral-800 dark:text-gray-300 text-base">{{
-        author.name.slice(0, 8)
-      }}</span>
+      <span class="font-bold text-neutral-800 dark:text-gray-300 text-base"
+        >{{ author.name.slice(0, 8) }}
+        <VerifiedIcon
+          class="w-4 h-4 mb-1 text-amber-500 inline"
+          v-if="author.verified"
+        />
+      </span>
       <span class="text-xs mx-3">@{{ author.username.slice(0, 8) }}</span>
       <span class="font-semibold text-xs">{{ tweet.created }}</span>
 
@@ -25,6 +29,7 @@
 </template>
 
 <script setup>
+import VerifiedIcon from "@heroicons/vue/24/solid/CheckBadgeIcon"
 const props = defineProps({
   tweet: {
     type: Object,

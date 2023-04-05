@@ -15,6 +15,7 @@ model User{
   name  String?
   username  String @unique
   email  String
+  verified Boolean
   password String
   profileImage String?
   refreshToken RefreshToken[]

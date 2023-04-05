@@ -27,7 +27,7 @@ export default eventHandler(async (event) => {
       event,
       createError({
         statusCode: "500",
-        statusMessage: "Server error",
+        message: "Server error",
       })
     )
   }

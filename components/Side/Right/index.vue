@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-3 sticky top-0 p-4 lg:p-6">
+  <div class="space-y-3 fixed top-0 p-4 lg:p-6">
     <SideRightSearch />
     <SideRightItem title="What's happening">
       <div

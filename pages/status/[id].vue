@@ -19,6 +19,8 @@
       />
 
       <TweetFeed :tweets="tweet.replies || []" />
+
+      <button @click="test">Tes</button>
     </div>
   </MainView>
 </template>
@@ -58,5 +60,8 @@ function handleSuccessAddTweet(tweet) {
 
 onBeforeMount(() => {
   getTweet()
+  window.scroll({
+    top: 0,
+  })
 })
 </script>

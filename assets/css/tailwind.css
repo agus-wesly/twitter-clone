@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @apply h-screen overflow-x-hidden;
+  @apply h-full overflow-x-hidden;
 }
 
 @layer utilities {
