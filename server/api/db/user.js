@@ -6,6 +6,14 @@ export const addUser = async (user) => {
   })
 }
 
+export const getAllUser = async () => {
+  return await prisma.user.findMany({
+    orderBy: {
+      createdAt: "asc",
+    },
+  })
+}
+
 export const findUserByUsername = async (username) => {
   return await prisma.user.findUnique({
     where: {
@@ -18,6 +26,16 @@ export const findUserById = async (id) => {
   return await prisma.user.findUnique({
     where: {
       id,
+    },
+  })
+}
+
+export const findUserThatIncludeUsername = async (username) => {
+  return await prisma.user.findFirst({
+    where: {
+      username: {
+        contains: username,
+      },
     },
   })
 }

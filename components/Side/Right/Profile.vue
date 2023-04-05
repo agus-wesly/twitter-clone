@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center">
       <div class="flex items-center gap-2 group">
         <img
-          src="/profile.jpeg"
+          :src="profileImage"
           class="w-10 h-10 rounded-full object-cover cursor-pointer"
         />
 
@@ -16,9 +16,6 @@
               <VerifiedIcon class="w-3 h-3 mt-1 text-sky-600" />
             </span>
           </h5>
-          <p class="text-neutral-500 text-sm">
-            {{ props.followers }} followers
-          </p>
         </div>
       </div>
 
@@ -40,13 +37,14 @@ const props = defineProps({
     required: true,
   },
 
-  followers: {
-    type: String,
-    required: true,
-  },
   isVerified: {
     type: Boolean,
-    required: false,
+    default: false,
+  },
+
+  profileImage: {
+    type: String,
+    required: true,
   },
 })
 </script>
