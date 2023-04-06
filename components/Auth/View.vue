@@ -71,6 +71,8 @@ const handleLogin = async () => {
     await loginUser(InputValue.username, InputValue.password)
     emits("onSuccess")
   } catch (err) {
+    console.log(err.message)
+
     error.value = err.message
   } finally {
     loading.value = false
