@@ -20,20 +20,23 @@ export default () => {
     authLoading.value = newVal
   }
 
-  const loginUser = async (username, password) => {
-    try {
-      const response = await $fetch("/api/auth/login", {
-        method: "POST",
-        body: {
-          username,
-          password,
-        },
-      })
-      setToken(response.accessToken)
-      setUser(response.user)
-    } catch (error) {
-      throw new Error(error.statusMessage)
-    }
+  const loginUser = (username, password) => {
+    return new Promise(async (res, rej) => {
+      try {
+        const response = await $fetch("/api/auth/login", {
+          method: "POST",
+          body: {
+            username,
+            password,
+          },
+        })
+        setToken(response.accessToken)
+        setUser(response.user)
+        res(true)
+      } catch (error) {
+        rej(error)
+      }
+    })
   }
 
   const refresh = () => {
