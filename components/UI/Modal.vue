@@ -1,6 +1,10 @@
 <template>
   <TransitionRoot appear :show="isOpen" as="template">
-    <Dialog as="div" @close="closeModal" class="h-screen">
+    <Dialog
+      as="div"
+      @close="closeModal"
+      class="h-screen overflow-auto bg-red-300"
+    >
       <TransitionChild
         as="template"
         enter="duration-300 ease-out"
@@ -20,7 +24,7 @@
           class="flex min-h-full items-center justify-center p-4 text-center"
         >
           <DialogPanel
-            class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white dark:bg-neutral-800 p-6 text-left align-middle shadow-xl transition-all"
+            class="w-full max-w-md transform rounded-2xl bg-white max-h-screen overflow-auto dark:bg-neutral-800 p-6 text-left align-middle shadow-xl transition-all"
           >
             <slot />
           </DialogPanel>

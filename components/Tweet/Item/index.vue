@@ -22,7 +22,8 @@
         <img
           :src="media.url"
           alt="tweet-media"
-          class="w-full rounded-2xl max-h-96 object-cover"
+          class="w-full rounded-2xl object-cover object-left-top"
+          :class="[props.compact ? 'max-h-max' : 'max-h-[800px]']"
         />
       </div>
 
