@@ -14,17 +14,11 @@
     <div
       class="flex-1 flex justify-center lg:flex-none lg:w-96 h-full items-center px-8"
     >
-      <div class="flex flex-col items-center space-y-4 w-full max-w-md">
+      <div class="flex flex-col items-center space-y-4 w-full max-w-md py-10">
         <h1 class="font-bold text-lg text-neutral-800 dark:text-neutral-200">
           Create Account
         </h1>
-        <p
-          v-if="error"
-          class="bg-red-500/90 p-2 rounded-2xl text-neutral-100 font-semibold text-sm w-full flex items-center gap-2"
-        >
-          <span class=""><LogoError /></span>
-          {{ error }}
-        </p>
+
         <div>
           <div class="w-20 h-20">
             <input
@@ -47,29 +41,38 @@
             Change Photo
           </button>
         </div>
+
         <UIInput
-          v-model:input-value="InputValue.name"
-          input-value=""
           label="Name"
           placeholder="Your name"
+          v-model:input-value="InputValue.name"
+          @validate="validate('name')"
+          :error="error.name"
         />
+
         <UIInput
           v-model:input-value="InputValue.username"
           input-value=""
           label="Username"
           placeholder="@username"
+          @validate="validate('username')"
+          :error="error.username"
         />
         <UIInput
           v-model:input-value="InputValue.email"
           input-value=""
           label="Email"
           placeholder="Your email"
+          @validate="validate('email')"
+          :error="error.email"
         />
         <UIInput
           v-model:input-value="InputValue.password"
           label="Password"
           placeholder="********"
           type="password"
+          @validate="validate('password')"
+          :error="error.password"
         />
         <UIInput
           v-model:input-value="InputValue.confirmPassword"
@@ -77,11 +80,13 @@
           label="Confirm Password"
           placeholder="********"
           type="password"
+          @validate="validate('confirmPassword')"
+          :error="error.confirmPassword"
         />
 
         <button
           @click="handleRegister"
-          :disabled="loading"
+          :disabled="loading || fieldStillError"
           class="bg-blue-500 disabled:bg-blue-300 disabled:cursor-not-allowed rounded-full w-full text-sm py-2 text-neutral-50 font-semibold hover:bg-blue-600"
         >
           <LogoLoading v-if="loading" />
@@ -100,7 +105,28 @@
 </template>
 
 <script setup>
+import * as yup from "yup"
+
 const { register } = useRegister()
+
+const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
+
+const registerFormSchema = yup.object().shape({
+  email: yup.string().required().email(),
+  password: yup
+    .string()
+    .required()
+    .matches(
+      passwordRegex,
+      "Password must contain at least 8 characters, including uppercase, lowercase, and numbers"
+    ),
+  confirmPassword: yup
+    .string()
+    .required()
+    .oneOf([yup.ref("password"), null], "Confirm password must match password"),
+  username: yup.string().required(),
+  name: yup.string().required(),
+})
 
 const InputValue = reactive({
   username: "",
@@ -109,16 +135,29 @@ const InputValue = reactive({
   password: "",
   confirmPassword: "",
 })
-const error = ref("")
+
+const error = reactive({
+  username: "",
+  name: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+})
 const loading = ref(false)
 const pictureRef = ref(null)
 const pictureURL = ref("")
 const picture = ref(null)
 
+const fieldStillError = computed(() => {
+  return (
+    Object.values(error).some((val) => Boolean(val)) ||
+    Object.values(InputValue).some((val) => !Boolean(val))
+  )
+})
+
 const handleRegister = async () => {
-  if (!InputValue.username || !InputValue.password) return
-  if (InputValue.password !== InputValue.confirmPassword) {
-    error.value = "Password and confirm password must match"
+  if (fieldStillError.value) {
+    return
   }
   try {
     loading.value = true
@@ -138,13 +177,16 @@ const handleRegister = async () => {
   }
 }
 
-watchEffect(() => {
-  if (error) {
-    if (InputValue.username || InputValue.password || InputValue.name) {
-      error.value = ""
-    }
-  }
-})
+function validate(path) {
+  registerFormSchema
+    .validateAt(path, InputValue)
+    .then(() => {
+      error[path] = ""
+    })
+    .catch((err) => {
+      error[err.path] = err.message
+    })
+}
 
 function handleChangeProfile() {
   pictureRef.value?.click()
