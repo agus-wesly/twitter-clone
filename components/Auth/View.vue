@@ -38,7 +38,7 @@
           :disabled="loading"
           class="bg-blue-500 disabled:bg-blue-300 disabled:cursor-not-allowed rounded-full w-full text-sm py-2 text-neutral-50 font-semibold hover:bg-blue-600"
         >
-          <LogoLoading v-if="loading" />
+          <LogoLoading v-if="loading" compact />
           <p v-else>Login</p>
         </button>
 

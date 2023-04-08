@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 w-full">
+  <div class="w-full" :class="{ 'p-5': !props.compact }">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -16,3 +16,12 @@
     </svg>
   </div>
 </template>
+
+<script setup>
+const props = defineProps({
+  compact: {
+    type: Boolean,
+    default: false,
+  },
+})
+</script>
