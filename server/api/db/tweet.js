@@ -26,3 +26,14 @@ export const searchTweet = (options = {}) => {
     ...options,
   })
 }
+
+export const likeOrDislikeTweet = (tweetId, options = {}) => {
+  return prisma.tweet.update({
+    where: {
+      id: tweetId,
+    },
+    data: {
+      ...options,
+    },
+  })
+}

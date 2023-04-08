@@ -10,5 +10,6 @@ export const tweetTransform = (twitter) => ({
   replies: !!twitter.replies ? twitter.replies.map(tweetTransform) : [],
   replyCount: !!twitter.replies ? twitter.replies.length : 0,
   media: !!twitter.media ? twitter.media.map(transformMedia) : [],
+  likedByIds: twitter.likedByIds,
   created: human(twitter.createdAt),
 })

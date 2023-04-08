@@ -78,10 +78,28 @@ export default () => {
       } catch (error) {
         console.log(error)
 
+        rej("Username or password incorrect")
+      }
+    })
+  }
+
+  const likeTweet = (tweetId, action) => {
+    return new Promise(async (res, rej) => {
+      try {
+        const { data } = await useFetchData(`/api/tweet/${tweetId}`, {
+          method: "PUT",
+          body: {
+            action,
+          },
+        })
+
+        res(data)
+      } catch (error) {
         rej(error)
       }
     })
   }
+
   return {
     uploadTweet,
     getAllTweets,
@@ -92,5 +110,6 @@ export default () => {
     setModalContent,
     closeModal,
     openModal,
+    likeTweet,
   }
 }

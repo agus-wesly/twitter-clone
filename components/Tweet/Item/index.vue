@@ -41,25 +41,20 @@
           </p>
         </TweetItemIcon>
 
-        <TweetItemIcon :compact="props.compact" color="yellow">
+        <TweetItemIcon
+          @click.stop.prevent="handleLike"
+          :compact="props.compact"
+          color="red"
+        >
           <template #icon="{ classes }">
-            <ArrowPathIcon :class="classes" />
+            <HeartIconSolid
+              v-if="isLiked"
+              :class="classes"
+              class="text-red-500"
+            />
+            <HeartIcon v-else :class="classes" />
           </template>
-          1
-        </TweetItemIcon>
-
-        <TweetItemIcon :compact="props.compact" color="red">
-          <template #icon="{ classes }">
-            <HeartIcon :class="classes" />
-          </template>
-          1
-        </TweetItemIcon>
-
-        <TweetItemIcon :compact="props.compact" color="blue">
-          <template #icon="{ classes }">
-            <ArrowUpTrayIcon :class="classes" />
-          </template>
-          1
+          {{ tweetLike.length || 0 }}
         </TweetItemIcon>
       </div>
     </div>
@@ -69,10 +64,10 @@
 <script setup>
 import {
   ChatBubbleOvalLeftEllipsisIcon,
-  ArrowPathIcon,
-  ArrowUpTrayIcon,
   HeartIcon,
 } from "@heroicons/vue/24/outline"
+
+import HeartIconSolid from "@heroicons/vue/24/solid/HeartIcon"
 
 const props = defineProps({
   tweet: {
@@ -91,7 +86,14 @@ const props = defineProps({
 const tweet = props.tweet
 const tweetMedia = props.tweet?.media
 
-const { openModal } = useTweet()
+const { openModal, likeTweet } = useTweet()
+const { useAuthUser } = useAuth()
+const user = useAuthUser()
+
+const tweetLike = ref(props.tweet.likedByIds)
+const isLiked = computed(() =>
+  tweetLike.value.some((tw) => tw === user.value.id)
+)
 
 function handleTweetClick() {
   if (props.compact) return
@@ -102,5 +104,22 @@ function handleTweetClick() {
 
 function handleCommentClick() {
   openModal(tweet)
+}
+
+function getPutType() {
+  if (isLiked.value) {
+    return "DISLIKE"
+  }
+  return "LIKE"
+}
+
+async function handleLike() {
+  try {
+    const resp = await likeTweet(tweet.id, getPutType())
+
+    tweetLike.value = resp.likedByIds
+  } catch (err) {
+    console.log(err)
+  }
 }
 </script>

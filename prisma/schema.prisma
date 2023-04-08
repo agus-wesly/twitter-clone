@@ -23,9 +23,12 @@ model User{
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  tweets Tweet[]
+  tweets Tweet[] 
 
   media mediaFile[]
+
+  likedPostIds String[]   @db.ObjectId
+  likedPost Tweet[] @relation("like",fields: [likedPostIds], references: [id])
 }
 
 model RefreshToken {
@@ -55,6 +58,9 @@ model Tweet {
   replies Tweet[] @relation("replies")
 
   media mediaFile[]
+
+  likedByIds String[]   @db.ObjectId
+  likedBy User[] @relation("like",fields: [likedByIds], references: [id])
 
 }
 
