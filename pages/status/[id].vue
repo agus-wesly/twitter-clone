@@ -20,7 +20,6 @@
 
       <TweetFeed :tweets="tweet.replies || []" />
 
-      <button @click="test">Tes</button>
     </div>
   </MainView>
 </template>

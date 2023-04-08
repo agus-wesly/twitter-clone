@@ -1,7 +1,7 @@
 export default () => {
-  const getAllUsers = async () => {
+  const getAllUsers = async (limit = 0) => {
     try {
-      const { data } = await useFetchData("/api/users")
+      const { data } = await useFetchData(`/api/users?limit=${limit}`)
 
       return data
     } catch (error) {

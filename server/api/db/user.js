@@ -6,8 +6,9 @@ export const addUser = async (user) => {
   })
 }
 
-export const getAllUser = async () => {
+export const getAllUser = async (options = {}) => {
   return await prisma.user.findMany({
+    ...options,
     orderBy: {
       createdAt: "asc",
     },

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed flex flex-col items-center md:items-start gap-6 top-0 p-4 lg:p-6 h-screen"
+    class="fixed flex flex-col items-center md:items-start gap-6 top-0 p-4 lg:p-6 h-[95vh]"
   >
     <div
       class="w-min rounded-full hover:bg-sky-100 dark:hover:bg-neutral-900 p-2 mb-2 -mt-1"

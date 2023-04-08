@@ -77,7 +77,7 @@ const accounts = ref([])
 onMounted(async () => {
   loading.value = true
   try {
-    const data = await getAllUsers()
+    const data = await getAllUsers(3)
     accounts.value = data
   } catch (err) {
     error.value = err
