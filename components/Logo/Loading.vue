@@ -1,5 +1,5 @@
 <template>
-  <div class="p-10 w-full">
+  <div class="p-4 w-full">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
